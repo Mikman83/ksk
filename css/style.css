@@ -1330,7 +1330,8 @@ pre {
 
 .pictures-slider {
   position: relative;
-  padding: 0 12px; }
+  padding: 0 12px;
+  padding-top: 12px; }
   .pictures-slider .slick-arrow {
     position: absolute;
     outline: none;
@@ -1457,5 +1458,205 @@ pre {
 
 .files-accardion__file-link p {
   color: rgba(0, 0, 0, 0.75); }
+
+.description {
+  padding: 25px; }
+  .description__advantages-title h2,
+  .description__location-title h2,
+  .description__renovation-title h2,
+  .description__district-title h2 {
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center; }
+  .description__location, .description__renovation, .description__district, .description__district-infrastructure {
+    margin-top: 50px; }
+  .description__location-img, .description__renovation-slider, .description__renovation-list, .description__district-slider {
+    margin-top: 30px; }
+  .description__location-text {
+    font-size: 15px;
+    margin-top: 30px; }
+  .description__renovation-text {
+    font-size: 20px;
+    text-align: center; }
+  @media (min-width: 1200px) {
+    .description__advantages-items {
+      width: 50%;
+      margin: 0 auto; } }
+  @media (min-width: 1200px) {
+    .description__location {
+      width: 65%;
+      margin: 0 auto;
+      margin-top: 50px; } }
+  @media (min-width: 1200px) {
+    .description__location-text {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 25px; } }
+  @media (min-width: 1200px) {
+    .description__renovation {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      width: 65%;
+      margin: 0 auto;
+      margin-top: 50px; } }
+  @media (min-width: 1200px) {
+    .description__renovation-title {
+      -webkit-box-ordinal-group: -1;
+          -ms-flex-order: -2;
+              order: -2; } }
+  @media (min-width: 1200px) {
+    .description__renovation-text {
+      margin-top: 25px; } }
+  @media (min-width: 1200px) {
+    .description__renovation-slider {
+      -webkit-box-ordinal-group: 0;
+          -ms-flex-order: -1;
+              order: -1; } }
+  @media (min-width: 1200px) {
+    .description__renovation-list {
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 25px; } }
+  @media (min-width: 1200px) {
+    .description__district {
+      width: 65%;
+      margin: 0 auto;
+      margin-top: 50px; } }
+  @media (min-width: 1200px) {
+    .description__district-infrastructure {
+      margin: 50px -50px; } }
+
+.advantages-list {
+  list-style: none;
+  padding-left: 35px; }
+  .advantages-list__item {
+    position: relative;
+    margin-top: 20px;
+    font-size: 15px; }
+  .advantages-list__item:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 24px;
+    height: 27px;
+    left: -35px;
+    background-size: contain;
+    background-repeat: no-repeat; }
+    @media (min-width: 1200px) {
+      .advantages-list__item:before {
+        width: 35px;
+        height: 35px;
+        left: -50px; } }
+  .advantages-list__item--square:before {
+    background-image: url(../img/description/1.png); }
+  .advantages-list__item--lift:before {
+    background-image: url(../img/description/2.png); }
+  .advantages-list__item-layout:before {
+    background-image: url(../img/description/3.png); }
+  .advantages-list__item--nature:before {
+    background-image: url(../img/description/4.png); }
+  .advantages-list__item--windows:before {
+    background-image: url(../img/description/5.png); }
+  .advantages-list__item--roads:before {
+    background-image: url(../img/description/6.png); }
+
+.infrastructure__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0 -15px; }
+
+.infrastructure__item {
+  width: 50%;
+  padding: 15px; }
+  @media (min-width: 768px) {
+    .infrastructure__item {
+      padding: 15px 70px; } }
+  @media (min-width: 1200px) {
+    .infrastructure__item {
+      position: relative; } }
+
+.infrastructure__item:before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: contain; }
+  @media (min-width: 1200px) {
+    .infrastructure__item:before {
+      position: absolute;
+      left: 0; } }
+
+.infrastructure__item--education:before {
+  background-image: url(../img/infrastructure/education.png); }
+
+.infrastructure__item--medical:before {
+  background-image: url(../img/infrastructure/medical.png); }
+
+.infrastructure__item--sport:before {
+  background-image: url(../img/infrastructure/sport.png); }
+
+.infrastructure__item--sciens:before {
+  background-image: url(../img/infrastructure/sciens.png); }
+
+.infrastructure__item--creation:before {
+  background-image: url(../img/infrastructure/creation.png); }
+
+.infrastructure__item--rest:before {
+  background-image: url(../img/infrastructure/rest.png); }
+
+.infrastructure__title {
+  font-size: 20px;
+  text-align: center; }
+  @media (min-width: 1200px) {
+    .infrastructure__title {
+      text-align: left; } }
+
+.infrastructure__text {
+  font-size: 15px; }
+
+.infrastructure__text span {
+  display: block; }
+
+.maps {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 25px; }
+  @media (min-width: 1200px) {
+    .maps {
+      padding: 35px;
+      margin-bottom: 15px; } }
+  .maps__item {
+    margin: 15px 0; }
+
+.maps {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 25px; }
+  @media (min-width: 1200px) {
+    .maps {
+      padding: 35px;
+      margin-bottom: 15px; } }
+  .maps__item {
+    margin: 15px 0; }
 
 /*# sourceMappingURL=style.css.map */
