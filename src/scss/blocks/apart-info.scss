@@ -1,0 +1,271 @@
+.apart-info {
+  padding: 0 25px;
+
+  &__title h2{
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: $screen-sm) {
+      flex-direction: row;
+      margin: 30px 0;
+    }
+  }
+
+  &__descr {
+    border: 2px solid $main-color;
+    padding: 15px 35px;
+    margin: 30px 0;
+
+    @media (min-width: $screen-sm) {
+      width: 35%;
+      margin: 0;
+    }
+
+    @media (min-width: $screen-lg) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 35px;
+    }
+  }
+
+  &__object-link {
+    margin-bottom: 1em;
+  }
+
+  &__object-link a {
+    font-size: 14px;
+    color: $second-color;
+
+    @media (min-width: $screen-sm) {
+      font-size: 18px;
+    }
+
+    @media (min-width: $screen-lg) {
+      font-size: 30px;
+    }
+  }
+
+  &__room-value {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+
+    @media (min-width: $screen-sm) {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    @media (min-width: $screen-lg) {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__object-status {
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    @media (min-width: $screen-sm) {
+      margin-bottom: 15px;
+    }
+
+    @media (min-width: $screen-lg) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__prop {
+    text-transform: uppercase;
+    font-size: 12px;
+
+    @media (min-width: $screen-sm) {
+      font-size: 13px;
+    }
+
+    @media (min-width: $screen-lg) {
+      font-size: 18px;
+    }
+  }
+
+  &__square {
+    margin-bottom: 10px;
+
+    @media (min-width: $screen-sm) {
+      margin-bottom: 15px;
+    }
+
+    @media (min-width: $screen-lg) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__square-value {
+    display: inline-block;
+    text-transform: lowercase;
+    font-size: 26px;
+    margin-left: 1em;
+  }
+
+  &__decoration {
+    margin-bottom: 10px;
+
+    @media (min-width: $screen-sm) {
+      margin-bottom: 15px;
+    }
+
+    @media (min-width: $screen-lg) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__price {
+    margin-bottom: 10px;
+
+    @media (min-width: $screen-sm) {
+      margin-bottom: 15px;
+    }
+
+    @media (min-width: $screen-lg) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__value,
+  &__price-value {
+    font-size: 24px;
+    color: $main-color;
+
+    @media (min-width: $screen-sm) {
+      font-size: 26px;
+      font-weight: bold;
+    }
+  }
+
+  &__download-link {
+    margin-top: 1em;
+  }
+
+  &__download-link a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+
+    @media (min-width: $screen-sm) {
+      font-size: 14px;
+    }
+
+    @media (min-width: $screen-lg) {
+      font-size: 16px;
+    }
+  }
+
+  &__download-link a:before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/apart-info/document.png);
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+
+    @media (min-width: $screen-sm) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &__plans {
+    order: -1;
+    visibility: hidden;
+
+    @media (min-width: $screen-sm) {
+      display: flex;
+      flex-direction: column;
+      //justify-content: space-between;
+      order: 1;
+      width: 65%;
+    }
+  }
+
+  &__plans-slider {
+    position: relative;
+    padding: 30px;
+
+    @media (min-width: $screen-sm) {
+      padding: 10px 60px;
+    }
+  }
+
+  & .slick-arrow {
+    position: absolute;
+    outline: none;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    font-size: 0;
+    border: none;
+    border-left: 1px solid $main-color;
+    border-bottom: 1px solid $main-color;
+    background-color: transparent;
+  }
+
+  & .slick-prev {
+    left: 0;
+    top: 50%;
+    transform: rotate(45deg);
+    transform-origin: center;
+
+    @media (min-width: $screen-sm) {
+      left: 25px;
+    }
+  }
+
+  & .slick-next {
+    right: 0;
+    top: 50%;
+    transform: rotate(225deg);
+    transform-origin: center;
+
+    @media (min-width: $screen-sm) {
+      right: 25px;
+    }
+  }
+
+  &__booking-link {
+    text-align: center;
+    visibility: visible;
+
+    @media (min-width: $screen-sm) {
+      margin-top: auto;
+    }
+  }
+
+  &__preview-link {
+    display: none;
+    visibility: visible;
+
+    @media (min-width: $screen-sm) {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+    }
+  }
+
+  &__preview-link a {
+    color: $second-color;
+  }
+}
