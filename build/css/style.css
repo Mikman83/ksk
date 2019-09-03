@@ -901,26 +901,6 @@ pre {
   .select2-container--default .select2-selection--multiple .select2-selection__choice span {
     display: none; }
 
-.select2-container:after {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  right: 20px;
-  top: 11px;
-  border-right: 1px solid #ffffff;
-  border-bottom: 1px solid #ffffff;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  -webkit-transition: all .5s;
-  transition: all .5s; }
-
-.select2-container--open:after {
-  -webkit-transform: rotate(225deg);
-          transform: rotate(225deg);
-  top: 17px; }
-
 .page-header {
   padding: 15px 15px; }
   .page-header__inner {
@@ -1324,8 +1304,11 @@ pre {
           box-shadow: 0px 4px 8px #d9d9d9; }
 
 .product-card__img--frame {
+  height: 280px;
   padding: 20px;
   background: rgba(255, 138, 0, 0.25); }
+  .product-card__img--frame img {
+    height: 100%; }
 
 .product-card__title {
   padding: 20px; }
@@ -2778,35 +2761,56 @@ pre {
     border: 1px solid #fff;
     border-radius: 0;
     outline: none; }
-  .obj-filter__complex-wrap .select2-selection__arrow,
-  .obj-filter__deadline-wrap .select2-selection__arrow,
-  .obj-filter__rooms-sel-wrap .select2-selection__arrow {
-    top: 9px !important;
-    right: 10px !important; }
-  .obj-filter__complex-wrap input[type="search"]::-webkit-input-placeholder,
-  .obj-filter__deadline-wrap input[type="search"]::-webkit-input-placeholder,
-  .obj-filter__rooms-sel-wrap input[type="search"]::-webkit-input-placeholder {
+  .obj-filter__complex-wrap .select2-container:after,
+  .obj-filter__deadline-wrap .select2-container:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    right: 20px;
+    top: 11px;
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transition: all .5s;
+    transition: all .5s; }
+  .obj-filter__complex-wrap .select2-container--open:after,
+  .obj-filter__deadline-wrap .select2-container--open:after {
+    -webkit-transform: rotate(225deg);
+            transform: rotate(225deg);
+    top: 17px; }
+  .obj-filter .select2-container--default .select2-search--inline .select2-search__field {
+    cursor: pointer; }
+  .obj-filter__complex-wrap input[type='search']::-webkit-input-placeholder,
+  .obj-filter__deadline-wrap input[type='search']::-webkit-input-placeholder,
+  .obj-filter__rooms-sel-wrap input[type='search']::-webkit-input-placeholder {
     color: #ffffff !important; }
-  .obj-filter__complex-wrap input[type="search"]::-moz-placeholder,
-  .obj-filter__deadline-wrap input[type="search"]::-moz-placeholder,
-  .obj-filter__rooms-sel-wrap input[type="search"]::-moz-placeholder {
+  .obj-filter__complex-wrap input[type='search']::-moz-placeholder,
+  .obj-filter__deadline-wrap input[type='search']::-moz-placeholder,
+  .obj-filter__rooms-sel-wrap input[type='search']::-moz-placeholder {
     color: #ffffff !important; }
-  .obj-filter__complex-wrap input[type="search"]:-ms-input-placeholder,
-  .obj-filter__deadline-wrap input[type="search"]:-ms-input-placeholder,
-  .obj-filter__rooms-sel-wrap input[type="search"]:-ms-input-placeholder {
+  .obj-filter__complex-wrap input[type='search']:-ms-input-placeholder,
+  .obj-filter__deadline-wrap input[type='search']:-ms-input-placeholder,
+  .obj-filter__rooms-sel-wrap input[type='search']:-ms-input-placeholder {
     color: #ffffff !important; }
-  .obj-filter__complex-wrap input[type="search"]::-ms-input-placeholder,
-  .obj-filter__deadline-wrap input[type="search"]::-ms-input-placeholder,
-  .obj-filter__rooms-sel-wrap input[type="search"]::-ms-input-placeholder {
+  .obj-filter__complex-wrap input[type='search']::-ms-input-placeholder,
+  .obj-filter__deadline-wrap input[type='search']::-ms-input-placeholder,
+  .obj-filter__rooms-sel-wrap input[type='search']::-ms-input-placeholder {
     color: #ffffff !important; }
-  .obj-filter__complex-wrap input[type="search"]::placeholder,
-  .obj-filter__deadline-wrap input[type="search"]::placeholder,
-  .obj-filter__rooms-sel-wrap input[type="search"]::placeholder {
+  .obj-filter__complex-wrap input[type='search']::placeholder,
+  .obj-filter__deadline-wrap input[type='search']::placeholder,
+  .obj-filter__rooms-sel-wrap input[type='search']::placeholder {
     color: #ffffff !important; }
-  .obj-filter__complex-wrap .select2-container--default.select2-container--focus .select2-selection--multiple,
-  .obj-filter__deadline-wrap .select2-container--default.select2-container--focus .select2-selection--multiple,
-  .obj-filter__rooms-sel-wrap .select2-container--default.select2-container--focus .select2-selection--multiple {
-    border: 1px solid #ffffff; }
+  .obj-filter__complex-wrap .select2-container--default.select2-container--focus
+.select2-selection--multiple,
+  .obj-filter__deadline-wrap .select2-container--default.select2-container--focus
+.select2-selection--multiple,
+  .obj-filter__rooms-sel-wrap .select2-container--default.select2-container--focus
+.select2-selection--multiple {
+    border: 1px solid #ffffff;
+    cursor: pointer; }
   .obj-filter__complex-wrap .select2-selection__arrow b,
   .obj-filter__deadline-wrap .select2-selection__arrow b,
   .obj-filter__rooms-sel-wrap .select2-selection__arrow b {
@@ -2870,8 +2874,9 @@ pre {
   .obj-filter__rooms-count {
     width: 25%;
     height: 45px;
-    padding: 0 10px; }
-  .obj-filter__rooms-count input[type="checkbox"] {
+    padding: 0 10px;
+    cursor: pointer; }
+  .obj-filter__rooms-count input[type='checkbox'] {
     display: none; }
   .obj-filter__rooms-count label {
     display: block;
@@ -2880,7 +2885,7 @@ pre {
     text-align: center;
     line-height: 45px;
     border: 1px solid #ffffff; }
-  .obj-filter input[type="checkbox"]:checked + label {
+  .obj-filter input[type='checkbox']:checked + label {
     background-color: #ffffff;
     color: #039577; }
   .obj-filter__build-apartments-btn {
@@ -2889,7 +2894,9 @@ pre {
     font-size: 17px;
     border: 1px solid #039577;
     background-color: #ffffff;
-    color: #039577; }
+    color: #039577;
+    outline: none;
+    cursor: pointer; }
   .obj-filter__results {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2922,7 +2929,9 @@ pre {
     width: 50%;
     min-height: 45px;
     font-size: 16px;
-    border: none; }
+    border: none;
+    outline: none;
+    cursor: pointer; }
     @media (min-width: 1200px) {
       .obj-filter__results-btn {
         width: 20%; } }

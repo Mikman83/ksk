@@ -49,14 +49,38 @@
     outline: none;
   }
 
-  &__complex-wrap .select2-selection__arrow,
-  &__deadline-wrap .select2-selection__arrow,
-  &__rooms-sel-wrap .select2-selection__arrow {
-    top: 9px !important;
-    right: 10px !important;
+  &__complex-wrap  .select2-container:after,
+  &__deadline-wrap .select2-container:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    right: 20px;
+    top: 11px;
+    border-right: 1px solid $text-color-white;
+    border-bottom: 1px solid $text-color-white;
+    transform: rotate(45deg);
+    transition: all .5s;
   }
 
-  //&__complex-wrap .select2-search__field,
+  &__complex-wrap  .select2-container--open:after,
+  &__deadline-wrap .select2-container--open:after {
+    transform: rotate(225deg);
+    top: 17px;
+  }
+
+  //&__complex-wrap .select2-selection__arrow,
+  //&__deadline-wrap .select2-selection__arrow,
+  //&__rooms-sel-wrap .select2-selection__arrow {
+  //  top: 9px !important;
+  //  right: 10px !important;
+  //}
+
+  .select2-container--default .select2-search--inline .select2-search__field {
+    cursor: pointer;
+  }
+
   //&__deadline-wrap .select2-selection__placeholder,
   //&__complex-wrap .select2-selection__rendered,
   //&__deadline-wrap .select2-selection__rendered,
@@ -65,16 +89,23 @@
   //  color: $text-color-white !important;
   //}
 
-  &__complex-wrap input[type="search"]::placeholder,
-  &__deadline-wrap input[type="search"]::placeholder,
-  &__rooms-sel-wrap input[type="search"]::placeholder {
+  &__complex-wrap input[type='search']::placeholder,
+  &__deadline-wrap input[type='search']::placeholder,
+  &__rooms-sel-wrap input[type='search']::placeholder {
     color: $text-color-white !important;
   }
 
-  &__complex-wrap .select2-container--default.select2-container--focus .select2-selection--multiple,
-  &__deadline-wrap .select2-container--default.select2-container--focus .select2-selection--multiple,
-  &__rooms-sel-wrap .select2-container--default.select2-container--focus .select2-selection--multiple {
+  &__complex-wrap
+    .select2-container--default.select2-container--focus
+    .select2-selection--multiple,
+  &__deadline-wrap
+    .select2-container--default.select2-container--focus
+    .select2-selection--multiple,
+  &__rooms-sel-wrap
+    .select2-container--default.select2-container--focus
+    .select2-selection--multiple {
     border: 1px solid $text-color-white;
+    cursor: pointer;
   }
 
   &__complex-wrap .select2-selection__arrow b,
@@ -91,14 +122,12 @@
 
   &__complex,
   &__inner {
-
     @media (min-width: $screen-lg) {
       display: inline-block;
     }
   }
 
   &__complex {
-
     @media (min-width: $screen-lg) {
       width: 25%;
     }
@@ -124,21 +153,18 @@
   }
 
   &__deadline {
-
     @media (min-width: $screen-lg) {
       width: 35%;
     }
   }
 
   &__deadline-wrap {
-
     @media (min-width: $screen-sm) {
       width: 270px;
     }
   }
 
   &__build-apartments {
-
     @media (min-width: $screen-lg) {
       width: 30%;
       padding-right: 0;
@@ -150,13 +176,12 @@
     display: none;
 
     @media (min-width: $screen-lg) {
-    display: inline-block;
+      display: inline-block;
       width: 35%;
-  }
+    }
   }
 
   &__rooms-sel {
-
     @media (min-width: $screen-lg) {
       display: none;
     }
@@ -172,9 +197,10 @@
     width: 25%;
     height: 45px;
     padding: 0 10px;
+    cursor: pointer;
   }
 
-  &__rooms-count input[type="checkbox"] {
+  &__rooms-count input[type='checkbox'] {
     display: none;
   }
 
@@ -187,7 +213,7 @@
     border: 1px solid $text-color-white;
   }
 
-  input[type="checkbox"]:checked + label {
+  input[type='checkbox']:checked + label {
     background-color: $text-color-white;
     color: $second-color;
   }
@@ -199,6 +225,8 @@
     border: 1px solid $second-color;
     background-color: $text-color-white;
     color: $second-color;
+    outline: none;
+    cursor: pointer;
   }
 
   &__results {
@@ -231,6 +259,8 @@
     min-height: 45px;
     font-size: 16px;
     border: none;
+    outline: none;
+    cursor: pointer;
 
     @media (min-width: $screen-lg) {
       width: 20%;

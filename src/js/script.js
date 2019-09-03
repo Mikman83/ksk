@@ -1,3 +1,5 @@
+import { filterEntity } from './filter';
+
 $(document).ready(function() {
   // БУРГЕР
   $('.main-nav__toggle').click(function(e) {
@@ -127,57 +129,92 @@ $(document).ready(function() {
     adaptiveHeight: true,
   });
 
-  //СЕЛЕКТ ФОРМЫ
-  $('.obj-filter__complex-select').select2({
-    minimumResultsForSearch: Infinity,
-    placeholder: 'Все',
-    width: '270px',
-    closeOnSelect: false,
-  });
+  if (document.querySelector('.obj-filter__complex-select')) {
+    $('.obj-filter__complex-select').select2({
+      minimumResultsForSearch: Infinity,
+      placeholder: 'Все',
+      width: '270px',
+      closeOnSelect: false,
+      data: [
+        {
+          obj: 'centr',
+          text: 'МКР Центральный',
+          id: 'c',
+        },
+        {
+          obj: 'chd',
+          text: 'ЖК Чудная Долина',
+          id: 'cd',
+        },
+        {
+          obj: 'saray',
+          text: 'ЖК Павловский',
+          id: 'p',
+        },
+      ],
+    });
 
-  $('.obj-filter__deadline-select').select2({
-    minimumResultsForSearch: Infinity,
-    placeholder: 'Все',
-    width: '100%',
-    closeOnSelect: false,
-  });
+    $('.obj-filter__deadline-select').select2({
+      minimumResultsForSearch: Infinity,
+      placeholder: 'Все',
+      width: '100%',
+      closeOnSelect: false,
+      data: [
+        {
+          date: '1q2019',
+          text: '1-й квартал 2019',
+          id: 1,
+        },
+        {
+          date: '2q2019',
+          text: '2-й квартал 2019',
+          id: 2,
+        },
+        {
+          date: '2q2020',
+          text: '2-й квартал 2020',
+          id: 3,
+        },
+      ],
+    });
 
-  $('.obj-filter__rooms-sel-select').select2({
-    minimumResultsForSearch: Infinity,
-    placeholder: 'Все',
-    width: '270px',
-    closeOnSelect: false,
-  });
+    $('.obj-filter__deadline-select').on(
+      'select2:opening select2:closing',
+      function(event) {
+        var $searchfield = $(this)
+          .parent()
+          .find('.select2-search__field');
+        $searchfield.prop('disabled', true);
+      }
+    );
 
-  // disable search
+    $('.obj-filter__complex-select').on(
+      'select2:opening select2:closing',
+      function(event) {
+        var $searchfield = $(this)
+          .parent()
+          .find('.select2-search__field');
+        $searchfield.prop('disabled', true);
+      }
+    );
+  }
 
-  $('.obj-filter__rooms-sel-select').on(
-    'select2:opening select2:closing',
-    function(event) {
-      var $searchfield = $(this)
-        .parent()
-        .find('.select2-search__field');
-      $searchfield.prop('disabled', true);
+  const searchQuery = window.location.search;
+  const complex = window.location.search.split('=')[1];
+  if (complex) {
+    if (complex === 'pavlovsky') {
+      $('.obj-filter__complex-select').val(['p']);
+      $('.obj-filter__complex-select').trigger('change');
+    } else if (complex === 'centralny') {
+      $('.obj-filter__complex-select').val(['c']);
+      $('.obj-filter__complex-select').trigger('change');
+    } else if (complex === 'chdolina') {
+      $('.obj-filter__complex-select').val(['chd']);
+      $('.obj-filter__complex-select').trigger('change');
     }
-  );
+  }
 
-  $('.obj-filter__deadline-select').on(
-    'select2:opening select2:closing',
-    function(event) {
-      var $searchfield = $(this)
-        .parent()
-        .find('.select2-search__field');
-      $searchfield.prop('disabled', true);
-    }
-  );
-
-  $('.obj-filter__complex-select').on(
-    'select2:opening select2:closing',
-    function(event) {
-      var $searchfield = $(this)
-        .parent()
-        .find('.select2-search__field');
-      $searchfield.prop('disabled', true);
-    }
-  );
+  if (['pavlovsky', 'centralny', 'chdolina'].includes(complex)) {
+    filterEntity.renderFlatsList();
+  }
 });
