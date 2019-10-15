@@ -93,7 +93,7 @@ $(document).ready(function() {
 
   // СЛАЙДЕР ОБЪЕКТОВ
   $('.objects__slider').slick({
-    infinite: true,
+    infinite: false,
     slidesToShow: 4,
     responsive: [
       {
@@ -118,9 +118,29 @@ $(document).ready(function() {
   });
 
   // СЛАЙДЕР ОБЩИЙ ВИД
+
+  $('.pictures-slider').on('init', function(event, slick) {
+    const spanBlock = this.parentNode.querySelector('.specification__counts');
+    if (spanBlock) {
+      spanBlock.textContent = slick.slideCount;
+    }
+    $('.pictures-slider').css('display', 'block');
+  });
+
   $('.pictures-slider').slick({
     slidesToShow: 1,
     adaptiveHeight: true,
+  });
+
+  let slider = $('.pictures-slider');
+
+  $('.pictures-slider').on('afterChange', function(event, slick, currentSlide) {
+    const spanBlock = this.parentNode.querySelector(
+      '.specification__current-count'
+    );
+    if (spanBlock) {
+      spanBlock.textContent = currentSlide + 1;
+    }
   });
 
   // СЛАЙДЕР ПЛАНИРОВОК
@@ -136,20 +156,25 @@ $(document).ready(function() {
       width: '270px',
       closeOnSelect: false,
       data: [
-        {
-          obj: 'centr',
-          text: 'МКР Центральный',
-          id: 'c',
-        },
+        // {
+        //   obj: 'centr',
+        //   text: 'МКР Центральный',
+        //   id: 'c',
+        // },
         {
           obj: 'chd',
-          text: 'ЖК Чудная Долина',
+          text: 'ЖК Верхний',
           id: 'cd',
         },
+        // {
+        //   obj: 'saray',
+        //   text: 'ЖК Павловский',
+        //   id: 'p',
+        // },
         {
-          obj: 'saray',
-          text: 'ЖК Павловский',
-          id: 'p',
+          obj: 'premier',
+          text: 'ЖК Премьер',
+          id: 'pr',
         },
       ],
     });
@@ -161,19 +186,20 @@ $(document).ready(function() {
       closeOnSelect: false,
       data: [
         {
-          date: '1q2019',
-          text: '1-й квартал 2019',
-          id: 1,
+          text: '2019 год',
+          id: 2019,
         },
         {
-          date: '2q2019',
-          text: '2-й квартал 2019',
-          id: 2,
+          text: '2020 год',
+          id: 2020,
         },
         {
-          date: '2q2020',
-          text: '2-й квартал 2020',
-          id: 3,
+          text: '2021 год',
+          id: 2021,
+        },
+        {
+          text: '2022 год',
+          id: 2022,
         },
       ],
     });
@@ -208,13 +234,44 @@ $(document).ready(function() {
     } else if (complex === 'centralny') {
       $('.obj-filter__complex-select').val(['c']);
       $('.obj-filter__complex-select').trigger('change');
-    } else if (complex === 'chdolina') {
-      $('.obj-filter__complex-select').val(['chd']);
+    } else if (complex === 'verhniy') {
+      $('.obj-filter__complex-select').val(['cd']);
+      $('.obj-filter__complex-select').trigger('change');
+    } else if (complex === 'premier') {
+      $('.obj-filter__complex-select').val(['pr']);
       $('.obj-filter__complex-select').trigger('change');
     }
   }
 
-  if (['pavlovsky', 'centralny', 'chdolina'].includes(complex)) {
+  if (['pavlovsky', 'centralny', 'verhniy', 'premier'].includes(complex)) {
     filterEntity.renderFlatsList();
+  }
+
+  const linkShaumyana = document.getElementById('linkSh');
+  const linkKoltushi = document.getElementById('linkKoltushi');
+
+  if (linkShaumyana && linkKoltushi) {
+    const mapWrapper = document.querySelector('.contacts-map');
+    linkShaumyana.addEventListener('click', function(e) {
+      e.preventDefault();
+      mapWrapper.innerHTML = '';
+      const newScript = document.createElement('script');
+      newScript.setAttribute(
+        'src',
+        'http://api-maps.yandex.ru/services/constructor/1.0/js/?sid=c78mFLUWc5iUcRZkOF8tx_pebi4uUfEX&amp;width=600&amp;height=450'
+      );
+      mapWrapper.appendChild(newScript);
+    });
+
+    linkKoltushi.addEventListener('click', function(e) {
+      e.preventDefault();
+      mapWrapper.innerHTML = '';
+      const newScript = document.createElement('script');
+      newScript.setAttribute(
+        'src',
+        'http://api-maps.yandex.ru/services/constructor/1.0/js/?sid=jNIMSSaft1IBOkd8f3K2eeumIur6-QJG&amp;width=600&amp;height=450'
+      );
+      mapWrapper.appendChild(newScript);
+    });
   }
 });

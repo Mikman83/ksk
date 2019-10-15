@@ -1,5 +1,6 @@
 .pictures-slider {
   position: relative;
+  display: none;
   padding: 0 12px;
   padding-top: 12px;
 
@@ -18,12 +19,14 @@
 
   & .slick-prev {
     left: 20px;
+    cursor: pointer;
     bottom: -35px;
     transform: rotate(45deg);
   }
 
   & .slick-next {
     right: 20px;
+    cursor: pointer;
     bottom: -35px;
     transform: rotate(225deg);
   }

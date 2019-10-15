@@ -74,7 +74,7 @@
                       >
                     </li>
                     <li class="main-nav__sub-item">
-                      <a href="#" class="main-nav__sub-link">Новости</a>
+                      <a href="news.html" class="main-nav__sub-link">Новости</a>
                     </li>
                     <li class="main-nav__sub-item">
                       <a href="#" class="main-nav__sub-link">О Колтушах</a>
@@ -169,9 +169,15 @@
                   </div>
                 </div>
                 <div class="obj-filter__build-apartments">
-                  <button class="obj-filter__build-apartments-btn">
-                    Готовые квартиры
-                  </button>
+                  <span class="obj-filter__rooms-count obj-filter__ready">
+                    <input
+                      name="ready"
+                      id="ready"
+                      type="checkbox"
+                      value="ready"
+                    />
+                    <label for="ready">Готовые квартиры</label>
+                  </span>
                 </div>
               </div>
 
@@ -243,6 +249,8 @@
             <p class="object__list-item__status">Строится</p>
           </a>
         </div>
+
+        <a href="" class="offer-link load-more">Показать еще</a>
       </div>
     </main>
 

@@ -4,19 +4,34 @@ class Filter {
     this.finishDates = finishDates || [];
     this.rooms = rooms || [];
     this.flatsList = [];
+    this.ready = false;
+    this.startFlatCounterRender = 0;
+    this.currentPagination = 9;
     this.counterElement = document.querySelector('.obj-filter__results-text')
       ? document
           .querySelector('.obj-filter__results-text')
           .querySelector('span')
       : null;
+
+    const loadMoreButton = document.querySelector('.load-more');
+    if (loadMoreButton) {
+      loadMoreButton.addEventListener('click', e => {
+        e.preventDefault();
+        this.renderFlatsList(true);
+      });
+    }
   }
 
   defineComplexName(str) {
     if (str === 'cd') {
-      return 'ЖК Чудная Долина';
+      return 'ЖК Верхний';
     }
     if (str === 'p') {
       return 'ЖК Павловский';
+    }
+
+    if (str === 'pr') {
+      return 'ЖК Премьер';
     }
 
     return 'МКР Центральный';
@@ -49,40 +64,44 @@ class Filter {
 
   setFilterOption(option, value) {
     this[option] = value;
+    console.log(option, value);
     const filteredArray = this.filterFlatsList();
     this.counterElement.innerHTML = filteredArray.length;
 
-    if (option === 'ready') {
-      this.complex = [];
-      this.rooms = [];
-      document
-        .querySelector('.obj-filter__rooms-wrap')
-        .querySelectorAll('input[type="checkbox"]')
-        .forEach(function(sel) {
-          sel.checked = false;
-        });
-    } else {
-      this.ready = false;
-      document.querySelector('.obj-filter__build-apartments-btn').style = '';
-    }
+    // if (option === 'ready') {
+    //   this.complex = [];
+    //   this.rooms = [];
+    //   document
+    //     .querySelector('.obj-filter__rooms-wrap')
+    //     .querySelectorAll('input[type="checkbox"]')
+    //     .forEach(function(sel) {
+    //       sel.checked = false;
+    //     });
+    // } else {
+    //   this.ready = false;
+    //   document.querySelector('.obj-filter__build-apartments-btn').style = '';
+    // }
   }
 
-  renderFlatsList() {
+  renderFlatsList(noclear) {
     const wrapper = document.querySelector('.object__list');
-    wrapper.innerHTML = '';
+    if (!noclear) {
+      wrapper.innerHTML = '';
+    }
     const listPreparedForRender = this.filterFlatsList();
 
-    for (let i = 0; i < listPreparedForRender.length; i++) {
-      const priceFormatted =
-        listPreparedForRender[i].priceFlat.slice(0, 1) +
-        ' ' +
-        listPreparedForRender[i].priceFlat.slice(1, 4) +
-        ' ' +
-        listPreparedForRender[i].priceFlat.slice(4);
+    for (let i = this.startFlatCounterRender; i < this.currentPagination; i++) {
+      if (listPreparedForRender[i]) {
+        const priceFormatted =
+          listPreparedForRender[i].priceFlat.slice(0, 1) +
+          ' ' +
+          listPreparedForRender[i].priceFlat.slice(1, 4) +
+          ' ' +
+          listPreparedForRender[i].priceFlat.slice(4);
 
-      wrapper.innerHTML += `<div class="object-block__item product-card"><a href="${
-        listPreparedForRender[i].link_flats
-      }" class="product-card__link">
+        wrapper.innerHTML += `<div class="object-block__item product-card"><a href="${
+          listPreparedForRender[i].link_flats
+        }" target="_blank" class="product-card__link">
         <div class="product-card__img product-card__img--frame">
           <img
             src="${listPreparedForRender[i].imgLink}"
@@ -117,6 +136,18 @@ class Filter {
           </span>
         </div>
       </a></div>`;
+      }
+    }
+
+    const loadMoreButton = document.querySelector('.load-more');
+
+    if (listPreparedForRender.length - this.currentPagination > 0) {
+      this.startFlatCounterRender = this.currentPagination;
+      this.currentPagination = this.currentPagination + 9;
+
+      loadMoreButton.style.display = 'block';
+    } else {
+      loadMoreButton.style.display = 'none';
     }
   }
 
@@ -142,32 +173,45 @@ class Filter {
       this.counterElement.innerHTML = this.flatsList.length;
 
       this.addEventOnSubmit();
+
+      const complex = window.location.search.split('=')[1];
+
+      if (window.location.pathname.includes('poisk-kvartir') && !complex) {
+        this.renderFlatsList();
+      }
     }
   }
 
   addEventOnSubmit() {
+    // const readyFlatsButton = document.querySelector(
+    //   '.obj-filter__build-apartments-btn'
+    // );
+
     document
       .querySelector('.obj-filter__results-btn')
       .addEventListener('click', e => {
         e.preventDefault();
+        this.startFlatCounterRender = 0;
+        this.currentPagination = 9;
+
         this.renderFlatsList();
       });
 
-    const readyFlatsButton = document.querySelector(
-      '.obj-filter__build-apartments-btn'
-    );
+    // readyFlatsButton.addEventListener('click', e => {
+    //   e.preventDefault();
+    //   $('.obj-filter__complex-select').val([]);
+    //   $('.obj-filter__complex-select').trigger('change');
+    //   $('.obj-filter__deadline-select').val([]);
+    //   $('.obj-filter__deadline-select').trigger('change');
 
-    readyFlatsButton.addEventListener('click', e => {
-      e.preventDefault();
-      $('.obj-filter__complex-select').val([]);
-      $('.obj-filter__complex-select').trigger('change');
-
-      this.setFilterOption('ready', true);
-      readyFlatsButton.style.backgroundColor = 'rgba(255, 138, 0, 0.25)';
-      readyFlatsButton.style.borderColor = '#fff';
-      readyFlatsButton.style.color = '#fff';
-      this.renderFlatsList();
-    });
+    //   this.setFilterOption('ready', true);
+    //   this.startFlatCounterRender = 0;
+    //   this.currentPagination = 9;
+    //   readyFlatsButton.style.backgroundColor = 'rgba(255, 138, 0, 0.25)';
+    //   readyFlatsButton.style.borderColor = '#fff';
+    //   readyFlatsButton.style.color = '#fff';
+    //   this.renderFlatsList();
+    // });
   }
 
   filterFlatsList() {
@@ -175,7 +219,9 @@ class Filter {
       const isStudioAndStudiosSelected =
         this.rooms.includes('s') && flat.studio;
       if (this.ready) {
-        return Number(flat.delivery) < 2018;
+        if (Number(flat.delivery) > 2019) {
+          return false;
+        }
       }
 
       if (this.rooms.length) {
@@ -184,6 +230,12 @@ class Filter {
         }
 
         if (flat.studio && this.rooms.length && !this.rooms.includes('s')) {
+          return false;
+        }
+      }
+
+      if (this.finishDates.length) {
+        if (!this.finishDates.includes(flat.delivery)) {
           return false;
         }
       }
@@ -203,29 +255,39 @@ class Filter {
 
 export const filterEntity = new Filter();
 
-if (document.querySelector('.obj-filter__complex-select')) {
-  filterEntity.fetchFlatsList();
+$(document).ready(function() {
+  if (document.querySelector('.obj-filter__complex-select')) {
+    filterEntity.fetchFlatsList();
 
-  $('.obj-filter__complex-select').on('change', function(e) {
-    filterEntity.setFilterOption('complex', $(e.target).select2('val'));
-  });
-
-  $('.obj-filter__deadline-select').on('change', function(e) {
-    filterEntity.setFilterOption('finishDates', $(e.target).select2('val'));
-  });
-
-  const roomsForm = document.querySelector('.obj-filter__rooms-wrap');
-
-  const roomsCheckboxes = roomsForm.querySelectorAll('input[type="checkbox"]');
-
-  roomsCheckboxes.forEach(function(sel) {
-    sel.addEventListener('change', function(e) {
-      const newRoomsSelection = [];
-      roomsCheckboxes.forEach(function(check) {
-        if (check.checked) newRoomsSelection.push(check.value);
-      });
-
-      filterEntity.setFilterOption('rooms', newRoomsSelection);
+    $('.obj-filter__complex-select').on('change', function(e) {
+      filterEntity.setFilterOption('complex', $(e.target).select2('val'));
     });
-  });
-}
+
+    $('.obj-filter__deadline-select').on('change', function(e) {
+      filterEntity.setFilterOption('finishDates', $(e.target).select2('val'));
+    });
+
+    const roomsForm = document.querySelector('.obj-filter__rooms-wrap');
+
+    const roomsCheckboxes = roomsForm.querySelectorAll(
+      'input[type="checkbox"]'
+    );
+
+    const readyCheckbox = document.querySelector('#ready');
+
+    readyCheckbox.addEventListener('change', function(e) {
+      filterEntity.setFilterOption('ready', e.target.checked);
+    });
+
+    roomsCheckboxes.forEach(function(sel) {
+      sel.addEventListener('change', function(e) {
+        const newRoomsSelection = [];
+        roomsCheckboxes.forEach(function(check) {
+          if (check.checked) newRoomsSelection.push(check.value);
+        });
+
+        filterEntity.setFilterOption('rooms', newRoomsSelection);
+      });
+    });
+  }
+});
